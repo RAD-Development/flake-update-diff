@@ -18,8 +18,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, poetry2nix,pre-commit-hooks }@inputs:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      poetry2nix,
+      ...
+    }@inputs:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         # see https://github.com/nix-community/poetry2nix/tree/master#api for more functions and examples.
         pkgs = nixpkgs.legacyPackages.${system};
@@ -33,7 +41,18 @@
 
         formatter = pkgs.nixfmt-rfc-style;
 
-        devShells = import ./shell.nix {inherit self inputs system checks;};
-        checks = import ./checks.nix {inherit inputs system formatter;};
-      });
+        devShells = import ./shell.nix {
+          inherit
+            self
+            inputs
+            system
+            checks
+            ;
+        };
+        checks = import ./checks.nix { inherit inputs system formatter; };
+      }
+    )
+    // {
+      hydraJobs = import ./hydra/jobs.nix { inherit (self) inputs outputs; };
+    };
 }

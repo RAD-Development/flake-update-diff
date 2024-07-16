@@ -4,7 +4,7 @@
   formatter,
   ...
 }:
- {
+{
   pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
     src = ./.;
     hooks = {

@@ -23,12 +23,12 @@
     },
     "pulls": {
       "type": "githubpulls",
-      "value": "RAD-Development/flake-update-diff",
+      "value": "RAD-Development flake-update-diff",
       "emailresponsible": false
     },
     "branches": {
       "type": "github_refs",
-      "value": "RAD-Development/flake-update-diff heads -",
+      "value": "RAD-Development flake-update-diff heads -",
       "emailresponsible": false
     }
   }

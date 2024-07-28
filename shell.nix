@@ -1,5 +1,7 @@
 {
   self,
+  poetryConfig,
+  poetry2nix,
   inputs,
   checks,
   system,
@@ -24,6 +26,7 @@ let
       treefmt
       statix
       nixfmt-rfc-style
+      ruff
     ];
   };
 
@@ -32,6 +35,8 @@ let
 
   # pull in python/poetry dependencies
   poetry = pkgs.mkShell { packages = [ pkgs.poetry ]; };
+
+  poetry2nixshell = poetry2nix.mkPoetryEnv poetryConfig;
 in
 {
   default = pkgs.mkShell {
@@ -40,6 +45,7 @@ in
       rad-dev
       app
       poetry
+      poetry2nixshell
     ];
   };
 }

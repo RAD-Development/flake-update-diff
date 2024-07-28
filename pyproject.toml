@@ -14,7 +14,7 @@ sqlalchemy = "^2.0.31"
 main = "app.main:main"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "0.5.1"
+ruff = "0.5.5"
 
 [build-system]
 requires = ["poetry-core"]

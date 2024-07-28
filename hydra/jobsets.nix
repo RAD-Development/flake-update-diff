@@ -19,7 +19,7 @@ let
 
   prs = readJSONFile pulls;
   refs = readJSONFile branches;
-  repo = "ahuston-0/canvas_grit_automation";
+  repo = "RAD-Development/flake-update-diff";
 
   # template for creating a job
   makeJob =

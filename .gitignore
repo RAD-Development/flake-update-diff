@@ -22,3 +22,6 @@ test.*
 pre-drv
 post-drv
 post-diff
+
+# ruff cache
+.ruff_cache

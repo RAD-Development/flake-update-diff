@@ -19,4 +19,4 @@ command = "ruff"
 # Command-line arguments for the command
 options = ["format"]
 # Glob pattern of files to include
-includes = [ "*.py" ]
+includes = [ "*.py", ".pyc" ]

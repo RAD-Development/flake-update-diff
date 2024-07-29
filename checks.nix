@@ -4,6 +4,9 @@
   formatter,
   ...
 }:
+let
+  pkgs = inputs.nixpkgs.legacyPackages.${system};
+in
 {
   pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
     src = ./.;
@@ -42,6 +45,18 @@
 
       # toml hooks
       check-toml.enable = true;
+
+      # markdown hooks
+      mdl = {
+        enable = true;
+        settings.style =
+          (pkgs.writeText ".mdl_style.rb" ''
+            #!/usr/bin/env ruby
+
+            all
+            rule 'MD013', :tables => false
+          '').outPath;
+      };
 
       # git hooks
       check-merge-conflicts.enable = true;

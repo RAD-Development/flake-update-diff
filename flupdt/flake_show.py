@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import json
-from app.common import bash_wrapper
+from flupdt.common import bash_wrapper
 import shutil
 
 

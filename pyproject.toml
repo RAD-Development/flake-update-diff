@@ -1,17 +1,23 @@
 [tool.poetry]
-name = "app"
+name = "flupdt"
 version = "0.1.0"
-description = ""
+description = """\
+Nix flake update diff checker. \
+Useful for validating and diffing flakes after updates. \
+Short for fl(ake) up(date) d(iff).\
+"""
 authors = ["Alice Huston <aliceghuston@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [{ include = "flupdt" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 sqlalchemy = "^2.0.31"
 
 [tool.poetry.scripts]
-main = "app.main:main"
+flupdt = "flupdt.main:main"
+flake-update-diff = "flupdt.main:main"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "0.5.5"

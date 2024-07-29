@@ -70,10 +70,10 @@
       in
       rec {
         packages = {
-          myapp = poetry2nix.mkPoetryApplication poetryConfig // {
+          flupdt = poetry2nix.mkPoetryApplication poetryConfig // {
             develop = true;
           };
-          default = self.packages.${system}.myapp;
+          default = self.packages.${system}.flupdt;
         };
 
         formatter = pkgs.nixfmt-rfc-style;

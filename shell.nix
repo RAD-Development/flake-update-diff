@@ -31,7 +31,7 @@ let
   };
 
   # constructs the application in-place
-  app = pkgs.mkShell { inputsFrom = [ self.packages.${system}.myapp ]; };
+  flupdt = pkgs.mkShell { inputsFrom = [ self.packages.${system}.flupdt ]; };
 
   # pull in python/poetry dependencies
   poetry = pkgs.mkShell { packages = [ pkgs.poetry ]; };
@@ -43,7 +43,7 @@ in
     inputsFrom = [
       pre-commit
       rad-dev
-      app
+      flupdt
       poetry
       poetry2nixshell
     ];

@@ -21,7 +21,7 @@ def configure_logger(level: str = "INFO") -> None:
     )
 
 
-def bash_wrapper(command: str, path: str = ".") -> tuple[str, int]:
+def bash_wrapper(command: str, path: str = ".") -> tuple[str, str, int]:
     """Execute a bash command and capture the output.
 
     Args:
@@ -34,6 +34,6 @@ def bash_wrapper(command: str, path: str = ".") -> tuple[str, int]:
     """
     # This is a acceptable risk
     process = Popen(command.split(), stdout=PIPE, stderr=PIPE, cwd=path)  # noqa: S603
-    output, _ = process.communicate()
+    output, error = process.communicate()
 
-    return output.decode(), process.returncode
+    return output.decode(), error.decode(), process.returncode

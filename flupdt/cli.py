@@ -8,7 +8,7 @@ def parse_inputs():
         "flake_path", metavar="flake-path", help="path to flake to evaluate"
     )
     parser.add_argument(
-        "--keep-hydra", action="store_true",help="allow evaluating Hydra jobs"
+        "--keep-hydra", action="store_true", help="allow evaluating Hydra jobs"
     )
     args = parser.parse_args()
     return args

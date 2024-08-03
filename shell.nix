@@ -1,16 +1,13 @@
 {
   self,
+  pkgs,
   poetryConfig,
-  poetry2nix,
-  inputs,
   checks,
   system,
   ...
 }:
 
 let
-  inherit (inputs) nixpkgs;
-  pkgs = nixpkgs.legacyPackages.${system};
 
   # construct the shell provided by pre-commit for running hooks
   pre-commit = pkgs.mkShell {
@@ -34,9 +31,14 @@ let
   flupdt = pkgs.mkShell { inputsFrom = [ self.packages.${system}.flupdt ]; };
 
   # pull in python/poetry dependencies
-  poetry = pkgs.mkShell { packages = [ pkgs.poetry ]; };
+  poetry = pkgs.mkShell {
+    packages = [
+      pkgs.poetry
+      pkgs.poetry2nix.cli
+    ];
+  };
 
-  poetry2nixshell = poetry2nix.mkPoetryEnv poetryConfig;
+  poetry2nixshell = pkgs.poetry2nix.mkPoetryEnv poetryConfig;
 in
 {
   default = pkgs.mkShell {

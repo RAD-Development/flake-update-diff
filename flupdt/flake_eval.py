@@ -5,9 +5,10 @@ from typing import Optional
 from flupdt.common import bash_wrapper
 import re
 
-drv_re = re.compile(r'.*(/nix/store/.*\.drv).*')
+drv_re = re.compile(r".*(/nix/store/.*\.drv).*")
 
-def evaluate_output(path:str, output: str) -> Optional[str]:
+
+def evaluate_output(path: str, output: str) -> Optional[str]:
     logging.info(f"evaluating {output}")
     out = bash_wrapper(f"nix eval {path}#{output}")
     logging.debug(out[0])

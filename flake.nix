@@ -42,25 +42,28 @@
       nixpkgs,
       flake-utils,
       pre-commit-hooks,
+      poetry2nix,
       ...
     }@inputs:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
         # see https://github.com/nix-community/poetry2nix/tree/master#api for more functions and examples.
-        pkgs = nixpkgs.legacyPackages.${system};
-        poetry2nix = inputs.poetry2nix.lib.mkPoetry2Nix { inherit pkgs; };
+        pkgs = nixpkgs.legacyPackages.${system}.extend poetry2nix.overlays.default;
 
-        overrides = poetry2nix.overrides.withDefaults (
-          _final: prev: {
-            # prefer binary wheels instead of source distributions for rust based dependencies
-            # avoids needing to build them from source. technically a security risk
-            polars = prev.polars.override { preferWheel = true; };
-            ruff = prev.ruff.override { preferWheel = true; };
-            greenlet = prev.greenlet.override { preferWheel = true; };
-            sqlalchemy = prev.sqlalchemy.override { preferWheel = true; };
-          }
+        pyOverrides = _final: prev: {
+          # prefer binary wheels instead of source distributions for rust based dependencies
+          # avoids needing to build them from source. technically a security risk
+          polars = prev.polars.override { preferWheel = true; };
+          ruff = prev.ruff.override { preferWheel = true; };
+          greenlet = prev.greenlet.override { preferWheel = true; };
+          sqlalchemy = prev.sqlalchemy.override { preferWheel = true; };
+        };
+
+        overlay = pkgs.lib.composeExtensions pyOverrides (
+          import ./poetry-git-overlay.nix { inherit pkgs; }
         );
+        overrides = pkgs.poetry2nix.overrides.withDefaults overlay;
 
         poetryConfig = {
           inherit overrides;
@@ -69,8 +72,9 @@
         };
       in
       rec {
+        inherit pkgs;
         packages = {
-          flupdt = poetry2nix.mkPoetryApplication poetryConfig // {
+          flupdt = pkgs.poetry2nix.mkPoetryApplication poetryConfig // {
             develop = true;
           };
           default = self.packages.${system}.flupdt;
@@ -81,8 +85,8 @@
         devShells = import ./shell.nix {
           inherit
             self
+            pkgs
             poetryConfig
-            poetry2nix
             inputs
             system
             checks

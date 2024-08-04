@@ -34,5 +34,6 @@ Until `rad_development_python` (`rdp`) is in PyPI, we use the below steps to
 update the lock file when there is an update to `rdp`.
 
 1. Run `poetry lock` to update the poetry reference to GitHub
-1. Run `poetry2nix lock` to update the overlay which Poetry2Nix uses
+1. Run `poetry2nix lock --out .poetry-git-overlay.nix` to update the overlay
+   which Poetry2Nix uses
 1. Run `nix flake check` to verify that all is building as expected

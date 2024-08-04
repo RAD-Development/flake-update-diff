@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import json
-from flupdt.common import bash_wrapper
+from rad_development_python import bash_wrapper
 import shutil
 import logging
 import re

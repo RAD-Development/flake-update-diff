@@ -2,7 +2,7 @@
 
 import logging
 from typing import Optional
-from flupdt.common import bash_wrapper
+from rad_development_python import bash_wrapper
 import re
 
 drv_re = re.compile(r".*(/nix/store/.*\.drv).*")

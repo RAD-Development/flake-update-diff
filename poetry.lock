@@ -852,7 +852,7 @@ poetry = "^1.8.3"
 type = "git"
 url = "https://github.com/RAD-Development/rad-development-python"
 reference = "feature/nix"
-resolved_reference = "4ee897ab983234eda6f12dfcfd822bffab01f740"
+resolved_reference = "f919535e1eb39b78f77c3c2b8ccee9244fd7fc92"
 
 [[package]]
 name = "rapidfuzz"

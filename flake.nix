@@ -61,7 +61,7 @@
         };
 
         overlay = pkgs.lib.composeExtensions pyOverrides (
-          import ./poetry-git-overlay.nix { inherit pkgs; }
+          import ./.poetry-git-overlay.nix { inherit pkgs; }
         );
         overrides = pkgs.poetry2nix.overrides.withDefaults overlay;
 

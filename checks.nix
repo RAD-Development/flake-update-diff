@@ -22,14 +22,15 @@ in
         # The pattern of files to run on (default: "" (all))
         # see also https://pre-commit.com/#hooks-files
         files = "\\.nix$";
+        # exclude = [".poetry-git-overlay.nix"];
       };
       ## static analysis checks for nix
       nil.enable = true;
       statix.enable = true;
       deadnix = {
         enable = true;
+        # exclude = [".poetry-git-overlay.nix"];
         settings = {
-          exclude = [ "poetry-git-overlay.nix" ];
           noUnderscore = true; # ignore variables starting with underscore
           # ignore lambda patterns (useful for passing args from ({}@args)
           # to other functions)

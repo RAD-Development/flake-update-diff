@@ -3,7 +3,6 @@
 from flupdt.flake_show import get_derivations
 from flupdt.cli import parse_inputs
 from flupdt.flake_eval import evaluate_output
-from flupdt.common import configure_logger
 import logging
 import rad_development_python as rd
 

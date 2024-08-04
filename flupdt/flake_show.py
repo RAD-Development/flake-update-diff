@@ -33,9 +33,7 @@ def traverse_json(json_dict: dict) -> list[str]:
 
 
 def get_derivations_from_check(nix_path: str, path_to_flake: str) -> list[str]:
-    flake_check = bash_wrapper(
-        f"{nix_path} flake check --verbose --keep-going", path=path_to_flake
-    )
+    flake_check = bash_wrapper(f"{nix_path} flake check --verbose --keep-going", path=path_to_flake)
     if flake_check[2] != 0:
         logging.warn(
             "nix flake check returned non-zero exit code, collecting all available outputs"
@@ -57,9 +55,7 @@ def get_derivations(path_to_flake: str) -> list[str]:
     nix_path = shutil.which("nix")
     derivations = []
     if nix_path is None:
-        raise RuntimeError(
-            "nix is not available in the PATH, please verify that it is installed"
-        )
+        raise RuntimeError("nix is not available in the PATH, please verify that it is installed")
     flake_show = bash_wrapper(f"{nix_path} flake show --json", path=path_to_flake)
     if flake_show[2] != 0:
         logging.error("flake show returned non-zero exit code")

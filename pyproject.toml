@@ -41,6 +41,8 @@ ignore = [
     "ANN101", # (perm) this rule is deprecated
     "ANN102", # (perm) this rule is deprecated
     "G004",   # (perm) this is a performance nit
+    "COM812",  # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
+    "ISC001",  # https://docs.astral.sh/ruff/rules/single-line-implicit-string-concatenation/
 ]
 
 [tool.ruff.lint.per-file-ignores]
